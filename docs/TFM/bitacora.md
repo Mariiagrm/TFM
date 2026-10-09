@@ -197,7 +197,7 @@ Jobs 20841–20843 (hennessy, entorno `hennessy-frio`) y sondas 20844 y 20846 (s
   tiene seaborn, así que las gráficas no se actualizaban desde los jobs). Tablas del README
   actualizadas desde `results/resumen.csv`.
 - **Pendiente:** el commit `25ac1d0` borró `run_matmul_sparsity.py` con sus resultados y figuras,
-  pero `sparsity.md`/`.tex` siguen enlazando `resultados/hennessy-580/figuras/run_matmul_sparsity.*`.
+  pero `sparsity.md` sigue enlazando `resultados/hennessy-580/figuras/run_matmul_sparsity.*`.
 
 ## 2026-10-09 — Picos de la ficha de NVIDIA en las gráficas
 
@@ -287,6 +287,8 @@ pico de `mma.sync` e4m3 con acumulación en FP32 y en FP16 con `run_pico_mma` en
   - TLX falla en GB10, como siempre.
 - `docs/` sale del repositorio: ahora vive en `~/hennessy/tfm/docs` (`TFM_DOCS`; `ejecutar.sh`
   lo monta en el contenedor en `/workspace/docs`). El historial de git se reinicia en un único commit.
+- Se eliminan todos los `.tex` (secciones, tablas generadas y `tabla.tex` de cada ejecución) y los
+  scripts dejan de generarlos: la documentación queda solo en Markdown.
 
 ## Enlaces de origen de cada kernel
 
