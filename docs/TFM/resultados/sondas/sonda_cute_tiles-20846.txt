@@ -1,0 +1,23 @@
+# Job 20846 (hennessy, GB10, imagen cutlass): .sonda/sonda_cute_tiles.py
+# Barrido del tile CTA del dense_gemm de CuTe a 8192^3 fp16. ab_stage = etapas que calcula el ejemplo.
+# Resultado: mejor 128x256x64 = 37.8 TFLOP/s (cuBLAS 96). Ver .sonda/README.md.
+
+== Ejecutando .sonda/sonda_cute_tiles.py [cutlass]  ==
+GPU: NVIDIA GB10 (sm_121) | torch 2.9.0a0+145a3a7bda.nv25.10 | triton 3.8.0 | helion None | job 20846
+cuBLAS: 96.06 TFLOP/s (2411 MHz)
+Computed pipeline stages: ab_stage=2, epi_stage=4
+tile (128, 128, 64):   23.98 TFLOP/s (2431 MHz)
+Computed pipeline stages: ab_stage=5, epi_stage=4
+tile (128, 128, 32):   21.70 TFLOP/s (2418 MHz)
+Computed pipeline stages: ab_stage=1, epi_stage=4
+tile (128, 256, 64):   37.81 TFLOP/s (2437 MHz)
+Computed pipeline stages: ab_stage=1, epi_stage=4
+tile (256, 128, 64):   35.48 TFLOP/s (2470 MHz)
+Computed pipeline stages: ab_stage=3, epi_stage=4
+tile (64, 128, 64):   26.08 TFLOP/s (2411.0 MHz)
+Computed pipeline stages: ab_stage=3, epi_stage=4
+tile (128, 64, 64):   14.48 TFLOP/s (2418 MHz)
+Computed pipeline stages: ab_stage=5, epi_stage=4
+tile (64, 64, 64):   14.34 TFLOP/s (2411.0 MHz)
+== sonda_cute_tiles terminado en 13 s ==
+== Finalizado: 2026-10-08 18:17:37 ==

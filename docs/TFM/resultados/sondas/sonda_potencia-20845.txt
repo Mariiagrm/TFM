@@ -1,0 +1,35 @@
+# Job 20845 (hennessy, GB10, imagen triton-tlx): .sonda/sonda_potencia.py
+# Reposo 0.5 s, cuBLAS 8192^3 continuo de 0.5 a 4.5 s, reposo despues. P_inst = NVML_FI_DEV_POWER_INSTANT,
+# P_prom = nvmlDeviceGetPowerUsage (promedio). Muestras cada 20 ms, medianas por tramos de 0.25 s.
+# Resultado: P_prom va ~1 s retrasada; NVML actualiza cada ~0.5 s; el reloj baja de 2411 a ~2180 MHz bajo carga.
+
+== Ejecutando .sonda/sonda_potencia.py [triton-tlx]  ==
+campo instantaneo disponible: True
+ tramo(s)   reloj  P_inst  P_prom   (carga entre 0.5 y 4.5 s)
+  0.00     2411  11.579  11.615
+  0.25     2411  11.579  11.615
+  0.50     2411  100.511  20.569
+  0.75     2411  100.511  20.569
+  1.00     2184  91.948  62.512
+  1.25     2184  91.948  62.512
+  1.50     2184  91.689  94.315
+  1.75     2184  91.689  94.315
+  2.00     2184  91.621  91.732
+  2.25     2184  91.621  91.732
+  2.50     2184  91.643   91.63
+  2.75     2184  91.643   91.63
+  3.00     2184  91.643   91.63
+  3.25     2184  91.445  91.531
+  3.50     2177  91.272  91.432
+  3.75     2177  91.272  91.432
+  4.00     2171  91.245  91.282
+  4.25     2171  91.245  91.282
+  4.50     2171  59.433  88.274
+  4.75     2171  59.433  88.274
+  5.00     2411  12.243  52.503
+  5.25     2411  12.243  52.503
+  5.50     2411  12.155  16.681
+  5.75     2411  12.155  16.681
+  6.00     2411  12.155  16.681
+== sonda_potencia terminado en 13 s ==
+== Finalizado: 2026-10-08 18:17:24 ==

@@ -1,0 +1,19 @@
+# Job 20844 (hennessy, GB10, imagen cutlass): .sonda/sonda_cute_clusters.py
+# Hipotesis: el dense_gemm de CuTe rinde ~24 % de cuBLAS porque lanza pocos clusters persistentes.
+# Resultado: NO; forzando 48/96/192 clusters el rendimiento no cambia. Ver .sonda/README.md.
+
+== Ejecutando .sonda/sonda_cute_clusters.py [cutlass]  ==
+GPU: NVIDIA GB10 (sm_121) | torch 2.9.0a0+145a3a7bda.nv25.10 | triton 3.8.0 | helion None | job 20844
+SMs (torch): 48
+HardwareInfo.get_max_active_clusters: RuntimeError: CUDA error code=201(b'CUDA_ERROR_INVALID_CONTEXT')
+HardwareInfo.get_device_multiprocessor_count: 48
+HardwareInfo.get_l2_cache_size_in_bytes: 25165824
+cuBLAS: 94.83 TFLOP/s (2418 MHz, 10.8 W)
+Computed pipeline stages: ab_stage=2, epi_stage=4
+max_active_clusters=  48:   23.59 TFLOP/s  (2424.0 MHz, 46.6 W)  error_rel=0.00e+00
+Computed pipeline stages: ab_stage=2, epi_stage=4
+max_active_clusters=  96:   23.91 TFLOP/s  (2411.0 MHz, 34.3 W)  error_rel=0.00e+00
+Computed pipeline stages: ab_stage=2, epi_stage=4
+max_active_clusters= 192:   23.06 TFLOP/s  (2431 MHz, 32.9 W)  error_rel=0.00e+00
+== sonda_cute_clusters terminado en 7 s ==
+== Finalizado: 2026-10-08 18:15:22 ==

@@ -1,0 +1,26 @@
+# Job 20833 (hennessy, GB10): primer intento de run_pico_mma. Falla al enlazar con
+# 'nvcc -arch=sm_121a -shared': el PTX se genera para compute_121 (sin la 'a') y ptxas rechaza
+# las MMA FP4/block-scaled. Corregido con -gencode=arch=compute_121a,code=sm_121a (job 20834).
+# Resumen: mensajes de ptxas distintos (sin numero de linea) y cuantas veces aparecen.
+
+== Ejecutando benchmarks/run_pico_mma.py [triton-tlx]  ==
+GPU: NVIDIA GB10 (sm_121) | torch 2.9.0a0+145a3a7bda.nv25.10 | triton 3.8.0 | helion None | job 20833
+Traceback (most recent call last):
+  File "/workspace/tfm/benchmarks/run_pico_mma.py", line 311, in <module>
+    main()
+  File "/workspace/tfm/benchmarks/run_pico_mma.py", line 119, in main
+    lib = pico_mma.biblioteca()
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/tfm/src/Microbench/pico_mma.py", line 95, in biblioteca
+    raise RuntimeError(f"no se pudo compilar {so}:\n{r.stderr}")
+RuntimeError: no se pudo compilar /workspace/tfm/.cache/pico_mma/ab15bb655a1b/libpico_mma.so:
+   1233 error   : Instruction 'mma with block scale' not supported on .target 'sm_121'
+   1233 error   : Feature '.block_scale' not supported on .target 'sm_121'
+    822 error   : Feature '.kind::mxf4nvf4' not supported on .target 'sm_121'
+    411 error   : Instruction 'mma with with FP6/FP4 floating point type' not supported on .target 'sm_121'
+    411 error   : Feature '.scale_vec::4X' not supported on .target 'sm_121'
+    411 error   : Feature '.scale_vec::2X' not supported on .target 'sm_121'
+    411 error   : Feature '.scale_vec::1X' not supported on .target 'sm_121'
+    411 error   : Feature '.kind::mxf8f6f4' not supported on .target 'sm_121'
+    411 error   : Feature '.kind::f8f6f4' not supported on .target 'sm_121'
+      1 ptxas fatal   : Ptx assembly aborted due to errors
