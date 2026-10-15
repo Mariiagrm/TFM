@@ -1,18 +1,18 @@
 # run_matmul_fp8 (hennessy)
 
-Generado automáticamente desde `results/hennessy/run_matmul_fp8/20261008-145124_job20837/`.
+Generado automáticamente desde `results/hennessy/run_matmul_fp8/20261015-080825_job21058/`.
 
 ![run_matmul_fp8](figuras/run_matmul_fp8.png)
 
-| variante | M | N | K | BLOCK_SIZE_M | BLOCK_SIZE_N | BLOCK_SIZE_K | GROUP_SIZE_M | num_warps | num_stages | carga | error_rel | ms | ms_p20 | ms_p80 | reloj_mhz | potencia_w | tflops | gbs | mma |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| fp16 | 4096 | 4096 | 4096 | 128 | 128 | 32 | 8 | 4 | 4 | cp.async | 0.00021 | 1.4664 | 1.4602 | 1.5419 | 2470 | 77 | 93.73 | 68.6 | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 |
-| fp8 | 4096 | 4096 | 4096 | 256 | 128 | 128 | 8 | 8 | 3 | cp.async | 0.03752 | 0.9277 | 0.9247 | 0.9361 | 2463 | 67 | 148.14 | 72.3 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
-| fp8_tma | 4096 | 4096 | 4096 | 128 | 256 | 128 | 8 | 8 | 3 | TMA | 0.03752 | 0.9236 | 0.9216 | 0.9288 | 2457 | 49.8 | 148.8 | 72.7 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
-| fp8_cublas | 4096 | 4096 | 4096 |  |  |  |  |  |  | cublasLt | 0.03752 | 0.8049 | 0.8008 | 0.8663 | 2450 | 62.5 | 170.76 | 83.4 | cublasLt |
-| fp16 | 8192 | 8192 | 8192 | 128 | 256 | 64 | 8 | 8 | 3 | cp.async | 0.00021 | 12.0966 | 12.0379 | 12.5606 | 2476 | 81.1 | 90.89 | 33.3 | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 |
-| fp8 | 8192 | 8192 | 8192 | 256 | 128 | 128 | 8 | 8 | 3 | cp.async | 0.03755 | 7.5335 | 7.5152 | 7.559 | 2327 | 86.1 | 145.95 | 35.6 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
-| fp8_tma | 8192 | 8192 | 8192 | 128 | 256 | 128 | 8 | 8 | 3 | TMA | 0.03755 | 7.2786 | 7.2616 | 7.5394 | 2359 | 60.7 | 151.06 | 36.9 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
-| fp8_cublas | 8192 | 8192 | 8192 |  |  |  |  |  |  | cublasLt | 0.03755 | 5.9812 | 5.9189 | 6.2241 | 2275 | 81.3 | 183.83 | 44.9 | cublasLt |
+| variante | M | N | K | BLOCK_SIZE_M | BLOCK_SIZE_N | BLOCK_SIZE_K | GROUP_SIZE_M | num_warps | num_stages | carga | error_rel | ms | ms_p20 | ms_p80 | reloj_mhz | potencia_w | tflops | pct_pico | gbs | mma |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| fp16 | 4096 | 4096 | 4096 | 128 | 128 | 32 | 8 | 4 | 4 | cp.async | 0.00021 | 1.4233 | 1.4183 | 1.4997 | 2457 | 78.7 | 96.56 | 78.6 | 70.7 | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 |
+| fp8 | 4096 | 4096 | 4096 | 256 | 128 | 128 | 8 | 8 | 3 | cp.async | 0.03752 | 0.9431 | 0.939 | 0.9492 | 2457 | 71.2 | 145.73 | 59.9 | 71.2 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
+| fp8_tma | 4096 | 4096 | 4096 | 128 | 256 | 128 | 8 | 8 | 3 | TMA | 0.03752 | 0.9247 | 0.9226 | 0.9286 | 2457 | 70.6 | 148.64 | 61.1 | 72.6 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
+| fp8_cublas | 4096 | 4096 | 4096 |  |  |  |  |  |  | cublasLt | 0.03752 | 0.7906 | 0.7875 | 0.7977 | 2450 | 79.7 | 173.84 | 71.4 | 84.9 | cublasLt |
+| fp16 | 8192 | 8192 | 8192 | 128 | 256 | 64 | 8 | 8 | 3 | cp.async | 0.00021 | 12.5501 | 12.1036 | 12.6095 | 2476 | 88.3 | 87.61 | 71.3 | 32.1 | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 |
+| fp8 | 8192 | 8192 | 8192 | 256 | 128 | 128 | 8 | 8 | 3 | cp.async | 0.03755 | 7.6676 | 7.6348 | 8.0535 | 2229 | 89.9 | 143.4 | 58.9 | 35 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
+| fp8_tma | 8192 | 8192 | 8192 | 128 | 256 | 128 | 8 | 8 | 3 | TMA | 0.03755 | 7.3278 | 7.3135 | 7.5762 | 2301 | 90.4 | 150.05 | 61.7 | 36.6 | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32 |
+| fp8_cublas | 8192 | 8192 | 8192 |  |  |  |  |  |  | cublasLt | 0.03755 | 5.9444 | 5.8983 | 6.4114 | 2262 | 95.3 | 184.97 | 76 | 45.2 | cublasLt |
 
-*NVIDIA GB10 (sm_121), torch 2.9.0a0+145a3a7bda.nv25.10, triton 3.8.0, CUDA 13.0; job 20837, 2026-10-08T14:51:24. Mediana de triton.testing.do_bench.*
+*NVIDIA GB10 (sm_121), torch 2.9.0a0+145a3a7bda.nv25.10, triton 3.8.0, CUDA 13.0; job 21058, 2026-10-15T08:08:25. Mediana de triton.testing.do_bench.*

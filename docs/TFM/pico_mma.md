@@ -57,6 +57,25 @@ Antes de medir, cada instrucción se compila sola (`nvcc -cubin`) para `sm_121a`
    - Por eso con 4 warps/SM (uno por subpartición) el techo es el **~94 %** con cualquier ILP, y con ILP=1 el **56 %**.
    - Consecuencia de diseño: los kernels con `num_warps=4` (Triton + TMA en matmul, el tutorial de atención) o `num_warps=2` (Helion atención) necesitan **varios bloques residentes por SM** para no perder rendimiento por emisión.
 
+## Validación del pico de 122.7 TFLOP/s
+
+La cifra se ha comprobado por cuatro caminos independientes:
+
+1. **Recálculo desde los datos crudos** (`results/hennessy/run_pico_mma/ultimo/resultados.csv`). Cada `mma.sync.m16n8k16` hace 2·16·8·16 = 4 096 FLOP, y el kernel lanza 48 SMs × warps × iteraciones × ILP instrucciones. Por ejemplo, con 8 warps/SM e ILP 1: 48 · 8 · 156 822 · 4 096 FLOP / 2.0099 ms = **122.72 TFLOP/s**, el mismo valor registrado. Las 12 configuraciones con ≥ 8 warps/SM dan entre 122.2 y 122.7: es un techo duro, no un valor aislado.
+2. **Cuenta por ciclo.** 122.72 TFLOP/s / (48 SMs × 1 024 FLOP/ciclo/SM) = 2.497 GHz, dentro del reloj que NVML registró durante la medida (2 496–2 522 MHz). Los 1 024 FLOP/ciclo/SM son 4 subparticiones × 4 096 FLOP cada 16 ciclos.
+3. **Whitepaper de la RTX 5090** (mismo SM Blackwell GeForce; tabla 3, págs. 46–47, 170 SMs a 2 407 MHz de boost). Sus picos densos dan exactamente las mismas cifras por ciclo que se miden en GB10:
+
+   | ficha RTX 5090 (denso) | FLOP/ciclo/SM | medido en GB10 |
+   |:---|---:|---:|
+   | FP16, acumulación FP16: 419 TFLOP/s | 1 024 | 1 014–1 024 |
+   | FP8, acumulación FP16: 838 TFLOP/s | 2 048 | 2 041 |
+   | FP4: 1 676 TFLOP/s | 4 096 | 4 089 |
+
+   La diferencia es la acumulación en FP32: la ficha de la 5090 la recorta a la mitad (209.5 TFLOP/s = 512 FLOP/ciclo/SM), y en GB10 va a ritmo completo (f16→f32 rinde igual que f16→f16).
+4. **La única cifra oficial de GB10** ("1 PFLOP FP4 con sparsity", DGX Spark User Guide). Son 500 TFLOP/s densos, que a 4 096 FLOP/ciclo/SM × 48 SMs suponen un reloj de 2.54 GHz. A ese reloj, FP16 daría 125.0 TFLOP/s: los 122.7 medidos son el **98 %**.
+
+**Matiz sobre el nombre.** 122.7 TFLOP/s es un pico **medido en ráfaga** (~2.5 GHz), no un pico teórico al reloj máximo. NVML declara 3 003 MHz de reloj SM máximo, que darían 147.6 TFLOP/s, pero bajo carga de MMA la GPU nunca pasa de ~2.55 GHz, y en régimen sostenido baja a 2 424 MHz (119.1 TFLOP/s). Por eso, en el texto conviene llamarlo «pico de `mma.sync` medido (ráfaga)» y no «pico nominal» ni «teórico». Es la referencia adecuada para los benchmarks de `do_bench`, que también miden en ráfaga.
+
 ## Medir reloj y potencia en GB10
 
 Expresar un kernel como "% del pico" exige saber a qué reloj iba, porque el pico es 1 024 FLOP/ciclo/SM × 48 × reloj. Dos sondas (jobs 20844 y 20845; salidas en [resultados/sondas/](resultados/sondas/)) muestran que medirlo bien en GB10 no es trivial:

@@ -1,0 +1,72 @@
+[exited with code 0]
+
+### /machines/hennessy/home/mariag/tfm_entorno/logs/sonda_pr9734-21013.out
+== SONDA PR 9734 | NVIDIA GB10 sm_121 | torch 2.9.0a0+145a3a7bda.nv25.10 | triton 3.8.0 | gluon
+######## variante=base | sm_arch_from_capability(121) = sm_121a | cache /tmp/triton-base-4v38pcem
+[OK]    test del PR (cuda:120)       .target sm_120a   tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    test del PR (cuda:121)       .target sm_121a   tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_121a   tcgen05=no tmem=no | err 0.0e+00 |   93.7 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul TMA fp16       .target sm_121a   tcgen05=no tmem=no | err 0.0e+00 |   93.3 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul FP8            .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  147.2 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |   92.4 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_121a   tcgen05=no tmem=no | err 1.5e-05 |   79.1 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  241.0 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  240.5 GB/s | 
+[OK]    tl.dot_scaled MXFP4          .target sm_121a   tcgen05=no tmem=no | err — | suma de C = 11349.5 (debe coincidir entre variantes) | mma.sync.aligned.m16n8k64.row.col.kind::mxf4nvf4.block_scale.scale_vec::2X.f32.e2m1.e2m1.f32.ue8m0
+######## variante=fusionado | sm_arch_from_capability(121) = sm_121a | cache /tmp/triton-fusionado-we1ssgw0
+[OK]    test del PR (cuda:120)       .target sm_120    tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    test del PR (cuda:121)       .target sm_121a   tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_121a   tcgen05=no tmem=no | err 0.0e+00 |   94.1 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul TMA fp16       .target sm_121a   tcgen05=no tmem=no | err 0.0e+00 |   92.4 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul FP8            .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  145.7 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |   90.8 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_121a   tcgen05=no tmem=no | err 1.5e-05 |   79.2 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  242.2 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_121a   tcgen05=no tmem=no | err 2.1e-04 |  238.7 GB/s | 
+[OK]    tl.dot_scaled MXFP4          .target sm_121a   tcgen05=no tmem=no | err — | suma de C = 11349.5 (debe coincidir entre variantes) | mma.sync.aligned.m16n8k64.row.col.kind::mxf4nvf4.block_scale.scale_vec::2X.f32.e2m1.e2m1.f32.ue8m0
+######## variante=original | sm_arch_from_capability(121) = sm_121 | cache /tmp/triton-original-zgf_06sx
+[OK]    test del PR (cuda:120)       .target sm_120    tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    test del PR (cuda:121)       .target sm_121    tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_121    tcgen05=no tmem=no | err 0.0e+00 |   92.6 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[FALLO] Triton matmul TMA fp16       triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmpoeazu0mi.ptx, line 74; error   : Instruction 'tensormap.replace' not supported on .target 'sm_121' ptxas-blackwell /tmp/tmpoeazu0mi.ptx, line 78; error   : Instruction 'tensormap.replace' not supported on .target 'sm_121' ptxas-blackwell /tmp
+[OK]    Triton matmul FP8            .target sm_121    tcgen05=no tmem=no | err 2.1e-04 |  143.8 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |   91.1 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_121    tcgen05=no tmem=no | err 1.5e-05 |   81.2 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_121    tcgen05=no tmem=no | err 2.1e-04 |  241.0 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_121    tcgen05=no tmem=no | err 2.1e-04 |  241.3 GB/s | 
+[FALLO] tl.dot_scaled MXFP4          triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmpo0c_qg1u.ptx, line 613; error   : Instruction 'mma with block scale' not supported on .target 'sm_121' ptxas-blackwell /tmp/tmpo0c_qg1u.ptx, line 613; error   : Feature '.kind::mxf4nvf4' not supported on .target 'sm_121' ptxas-blackwell /tmp/
+== FIN SONDA: codigos de salida {'base': 0, 'fusionado': 0, 'original': 0}
+
+### /machines/pascal/home/mariag/Triton_Benchmark_NVIDIA_AMD/logs/sonda_pr9734-21014.out
+== SONDA PR 9734 | NVIDIA GeForce RTX 5090 sm_120 | torch 2.9.0a0+145a3a7bda.nv25.10 | triton 3.8.0 | gluon
+######## variante=base | sm_arch_from_capability(120) = sm_120a | cache /tmp/triton-base-6g1oo0zw
+[OK]    test del PR (cuda:120)       .target sm_120a   tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_120a   tcgen05=no tmem=no | err 0.0e+00 |  161.8 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul TMA fp16       .target sm_120a   tcgen05=no tmem=no | err 0.0e+00 |  161.9 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul FP8            .target sm_120a   tcgen05=no tmem=no | err 2.1e-04 |  278.7 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |  157.0 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_120a   tcgen05=no tmem=no | err 1.4e-05 |  137.2 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_120a   tcgen05=no tmem=no | err 2.1e-04 | 1444.7 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_120a   tcgen05=no tmem=no | err 2.1e-04 | 1443.3 GB/s | 
+[OK]    tl.dot_scaled MXFP4          .target sm_120a   tcgen05=no tmem=no | err — | suma de C = 5983.5 (debe coincidir entre variantes) | mma.sync.aligned.m16n8k64.row.col.kind::mxf4nvf4.block_scale.scale_vec::2X.f32.e2m1.e2m1.f32.ue8m0
+######## variante=fusionado | sm_arch_from_capability(120) = sm_120 | cache /tmp/triton-fusionado-st3_wru5
+[OK]    test del PR (cuda:120)       .target sm_120    tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_120    tcgen05=no tmem=no | err 0.0e+00 |  161.7 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[FALLO] Triton matmul TMA fp16       triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmpo8otk3k8.ptx, line 74; error   : Instruction 'tensormap.replace' not supported on .target 'sm_120' ptxas-blackwell /tmp/tmpo8otk3k8.ptx, line 78; error   : Instruction 'tensormap.replace' not supported on .target 'sm_120' ptxas-blackwell /tmp
+[OK]    Triton matmul FP8            .target sm_120    tcgen05=no tmem=no | err 2.1e-04 |  279.0 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |  157.0 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_120    tcgen05=no tmem=no | err 1.4e-05 |  137.3 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_120    tcgen05=no tmem=no | err 2.1e-04 | 1441.3 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_120    tcgen05=no tmem=no | err 2.1e-04 | 1442.1 GB/s | 
+[FALLO] tl.dot_scaled MXFP4          triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmp2237s5at.ptx, line 613; error   : Instruction 'mma with block scale' not supported on .target 'sm_120' ptxas-blackwell /tmp/tmp2237s5at.ptx, line 613; error   : Feature '.kind::mxf4nvf4' not supported on .target 'sm_120' ptxas-blackwell /tmp/
+######## variante=original | sm_arch_from_capability(120) = sm_120 | cache /tmp/triton-original-_28hn8pz
+[OK]    test del PR (cuda:120)       .target sm_120    tcgen05=no tmem=no | err — | solo compilar | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton matmul fp16           .target sm_120    tcgen05=no tmem=no | err 0.0e+00 |  161.7 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[FALLO] Triton matmul TMA fp16       triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmpd4b4kl3e.ptx, line 74; error   : Instruction 'tensormap.replace' not supported on .target 'sm_120' ptxas-blackwell /tmp/tmpd4b4kl3e.ptx, line 78; error   : Instruction 'tensormap.replace' not supported on .target 'sm_120' ptxas-blackwell /tmp
+[OK]    Triton matmul FP8            .target sm_120    tcgen05=no tmem=no | err 2.1e-04 |  279.1 TFLOP/s | mma.sync.aligned.m16n8k32.row.col.f32.e4m3.e4m3.f32
+[OK]    Triton FlashAttention fp16   .target ?         tcgen05=no tmem=no | err 3.8e-04 |  157.0 TFLOP/s | 
+[OK]    Gluon matmul fp16            .target sm_120    tcgen05=no tmem=no | err 1.4e-05 |  137.3 TFLOP/s | mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32
+[OK]    Triton RMSNorm fp16          .target sm_120    tcgen05=no tmem=no | err 2.1e-04 | 1440.9 GB/s | 
+[OK]    Gluon RMSNorm fp16           .target sm_120    tcgen05=no tmem=no | err 2.1e-04 | 1443.7 GB/s | 
+[FALLO] tl.dot_scaled MXFP4          triton.runtime.errors.PTXASError: PTXAS error: Internal Triton PTX codegen error `ptxas` stderr: ptxas-blackwell /tmp/tmpktvhy23i.ptx, line 613; error   : Instruction 'mma with block scale' not supported on .target 'sm_120' ptxas-blackwell /tmp/tmpktvhy23i.ptx, line 613; error   : Feature '.kind::mxf4nvf4' not supported on .target 'sm_120' ptxas-blackwell /tmp/
+== FIN SONDA: codigos de salida {'base': 0, 'fusionado': 0, 'original': 0}
